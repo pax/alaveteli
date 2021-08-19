@@ -1,6 +1,7 @@
 require 'alaveteli_localization/locale'
 require 'alaveteli_localization/hyphenated_locale'
 require 'alaveteli_localization/underscorred_locale'
+require 'routing_filters'
 
 class AlaveteliLocalization
   class << self
