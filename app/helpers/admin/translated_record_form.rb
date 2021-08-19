@@ -92,12 +92,22 @@ class Admin::TranslatedRecordForm < ActionView::Helpers::FormBuilder
       @template.concat(locale_name(locale))
 
       ul = @template.tag.ul do
-        errors.each do |attr, message|
-          content = @template.tag.li do
-            "#{ attr } #{ message }".html_safe
-          end
+        if rails_upgrade?
+          errors.each do |error|
+            content = @template.tag.li do
+              "#{ error.attribute } #{ error.message }".html_safe
+            end
 
-          @template.concat(content)
+            @template.concat(content)
+          end
+        else
+          errors.each do |attr, message|
+            content = @template.tag.li do
+              "#{ attr } #{ message }".html_safe
+            end
+
+            @template.concat(content)
+          end
         end
       end
 
